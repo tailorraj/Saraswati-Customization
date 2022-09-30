@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include saraswati_customization *.css
+recursive-include saraswati_customization *.csv
+recursive-include saraswati_customization *.html
+recursive-include saraswati_customization *.ico
+recursive-include saraswati_customization *.js
+recursive-include saraswati_customization *.json
+recursive-include saraswati_customization *.md
+recursive-include saraswati_customization *.png
+recursive-include saraswati_customization *.py
+recursive-include saraswati_customization *.svg
+recursive-include saraswati_customization *.txt
+recursive-exclude saraswati_customization *.pyc
