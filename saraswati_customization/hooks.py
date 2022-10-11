@@ -95,6 +95,26 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
+doc_events = {
+	"Sales Order": {
+		# "validate": "saraswati_customization.saraswati_customization.doctype_triggers.sales_order.validate"
+	}
+}
+
+# jenv = {
+# 		"methods": {["get_sales_invoice_data:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data"]},
+
+# 		"methods": ["get_delivery_note_data:saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"]
+# }
+
+
+jenv = {
+        "methods":
+		[
+			"get_sales_invoice_data:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data",
+			"get_delivery_note_data:saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"
+		]
+}
 # doc_events = {
 #	"*": {
 #		"on_update": "method",
@@ -123,6 +143,17 @@ app_license = "MIT"
 #		"saraswati_customization.tasks.monthly"
 #	]
 # }
+
+
+fixtures = [
+	{"dt": "Custom Field", "filters": [
+        [
+            "name", "in", [
+                "Sales Order-freight_charges_custom"
+            ]
+        ]
+    ]}
+]
 
 # Testing
 # -------
