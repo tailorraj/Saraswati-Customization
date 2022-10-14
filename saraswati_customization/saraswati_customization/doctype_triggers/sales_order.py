@@ -19,16 +19,17 @@ def validate(doc, method):
             })
             
             for taxes in doc.taxes:
-                if taxes.description in ["Output SGST-9%","Output CGST-9%","Output IGST-18%"]:
+                # if taxes.description in ["Output SGST-9%","Output CGST-9%","Output IGST-18%"]:
+                if taxes.charge_type =="On Net Total":    
                     taxes.idx = taxes.idx + 1  
                     taxes.charge_type = "On Previous Row Total"
                     taxes.row_id = "1"
-                    tax_total_final_value = (doc.freight_charges_custom * taxes.rate)/100
-                    # frappe.msgprint(str(tax_total_final_value))
-                    taxes.tax_amount = tax_total_final_value + (doc.total*taxes.rate)/100
-                    taxes.base_tax_amount = tax_total_final_value + (doc.total*taxes.rate)/100
-                    taxes.total = tax_total_final_value + (doc.total*taxes.rate)/100 + doc.total
-                    taxes.base_total = tax_total_final_value + (doc.total*taxes.rate)/100 + doc.total
+                    # tax_total_final_value = (doc.freight_charges_custom * taxes.rate)/100
+                    # # frappe.msgprint(str(tax_total_final_value))
+                    # taxes.tax_amount = tax_total_final_value + (doc.total*taxes.rate)/100
+                    # taxes.base_tax_amount = tax_total_final_value + (doc.total*taxes.rate)/100
+                    # taxes.total = tax_total_final_value + (doc.total*taxes.rate)/100 + doc.total
+                    # taxes.base_total = tax_total_final_value + (doc.total*taxes.rate)/100 + doc.total
            
         
         else:
@@ -47,7 +48,7 @@ def validate(doc, method):
                     tax.tax_amount = 0
                     tax.base_tax_amount = 0
                     tax.total = doc.total
-                    tax.base_total = doc.total
+                    tax.base_total = doc.total             
 
     doc.calculate_taxes_and_totals()
 

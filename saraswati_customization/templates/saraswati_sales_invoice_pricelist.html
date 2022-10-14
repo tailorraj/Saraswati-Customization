@@ -66,6 +66,8 @@
             <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">HSN Code</th>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Qty</th>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">UOM</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">List/Price</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Disc</th>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Rate/Unit</th>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;">GST(%)</th>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Amount</th>
@@ -101,6 +103,8 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].gst_hsn_code}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty|int}}<br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].uom}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{frappe.format(items[j].price_list_rate,{'fieldtype':'Currency'})}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{frappe.format(items[j].discount_percentage,{'fieldtype':'Percent'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
@@ -114,9 +118,10 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;"></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;"><br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;"></td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td> 
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;"></td>
-            <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td> -->
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
             
           </tr> 
            {% endif %}
@@ -153,7 +158,7 @@
       {% endif %}
       {% for tax in doc.taxes %}
       <tr>
-        <td class="tg-0pky" colspan="2">{{ tax.description }}</td>
+        <td class="tg-0pky" colspan="2" >{{ tax.description }}</td>
         <td class="tg-0pky">{% if i+1 == total_page %}{{frappe.format(tax.tax_amount_after_discount_amount, {'fieldtype': 'Currency'})}}{%endif%} </td>
       </tr>
       {% endfor %}
@@ -209,7 +214,7 @@
 </div>
 <!--Footer Part-->
 <div id="footer-html" class="hidden-pdf" style="padding-top:2px;">
-   <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png">
+    <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png">
 </div>
 <div >
   <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
