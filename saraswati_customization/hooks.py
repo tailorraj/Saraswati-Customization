@@ -150,7 +150,7 @@ fixtures = [
 	{"dt": "Custom Field", "filters": [
         [
             "name", "in", [
-                "Sales Order-freight_charges_custom"
+                "Sales Order-freight_charges_custom","Sales Invoice Item-product_description","Delivery Note Item-product_description"
             ]
         ]
     ]}

@@ -42,8 +42,8 @@
 <table class="tg" width="100%">
     <thead>
       <tr>
-         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Deliver To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{{doc.address_display}}</p></td>
-         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Ship To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{{doc.shipping_address}}</p></td>
+         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Deliver To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_play%}{{doc.address_display}}{% endif %}</p></td>
+         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Ship To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.shipping_address%}{{doc.shipping_address}}{% endif %}</p></td>
          <td class="tg-0lax" colspan="2" rowspan="2" width="25%">
                 <p>Delivery No:<b>{{doc.name}}</b></p>
                 <p>Delivery Date:<b>{{frappe.format(doc.posting_date,{'fieldtype' :'Date'})}}</b></p>
@@ -94,8 +94,9 @@
                 <p><strong>Batch No.:{{i.batch_no}} - {{i.qty}} Qty</strong></p>
               {% endif %} 
               {% endfor %}
-              {{items[j].description}} 
-            
+              {%if items[j].product_description%}
+              {{items[j].product_description}}
+              {% endif %}
             </td>
             <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px!important;">{{items[j].description}}</td> -->
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px!important;">{{items[j].gst_hsn_code}}</td>

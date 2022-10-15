@@ -29,6 +29,7 @@ def get_grouped_data(data_of_dict):
             result[key] = {
                 "item_code": data.item_code,
                 "description": data.description,
+                "product_description":data.product_description,
                 "gst_hsn_code": data.gst_hsn_code,
                 "qty": data.qty,
                 "uom": data.uom,
