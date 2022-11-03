@@ -19,17 +19,17 @@
     <thead>
       <tr>
         <th class="lg" colspan="2" style="white-space: nowrap; font-size: 14px;">Tax Invoice</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;">Gst No:24ADQFS8259L1Z6</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;">Msme No:UDYAM-GJ-01-0058633</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;">Pan No:ADQFS8259L</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;">{% if doc.copy_type %}{{doc.copy_type}}{% endif %}</th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Gst No:24ADQFS8259L1Z6</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Msme No:UDYAM-GJ-01-0058633</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Pan No:ADQFS8259L</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>{% if doc.copy_type %}{{doc.copy_type}}{% endif %}</b></th>
         </tr>
     </thead>
   </table>
   <table class="tg" width="100%">
     <thead>
       <tr>
-        <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Bill To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_play%}{{doc.address_display}}{% endif %}</p></td>
+        <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Bill To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_display%}{{doc.address_display}}{% endif %}</p></td>
         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Ship To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.shipping_address%}{{doc.shipping_address}}{% endif %}</p></td>
         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">
             <p>Invoice No:<b>{{doc.name}}</b></p>
@@ -92,7 +92,7 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].item_code}}<br />
                 {% for i in items[j].batch %}
                 {% if i.batch_no %}
-                <p><strong>{{i.batch_no}} - {{i.qty}} {{items[j].uom}}</strong></p>
+                <p><strong>{{i.batch_no|replace("\n", ",")}} - {{i.qty}} {{items[j].uom}}</strong></p>
                 {% endif %}
                 {% endfor %}
                 {%if items[j].product_description%}
@@ -100,12 +100,12 @@
                 {% endif %}
             </td>
             <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].description}}</td> -->
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].gst_hsn_code}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].gst_hsn_code}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty|int}}<br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].uom}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
             
           </tr>
           {% else %}
@@ -162,17 +162,17 @@
     </thead>
     <tbody>
       <tr>
-        <td class="tg-0pky" colspan="5">Irn No:{%if doc.irn %}{{doc.irn}}{% endif %}</td>
-        <td class="tg-0pky" colspan="2">Rounded Total:</td>
-        <td class="tg-0pky" style="white-space: nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.grand_total,{'fieldtype':'Currency'})}} {% endif %}</td>
+        <td class="tg-0pky" colspan="5"><b>Irn No:</b>{%if doc.irn %}{{doc.irn}}{% endif %}</td>
+        <td class="tg-0pky" colspan="2">Rounded off:</td>
+        <td class="tg-0pky" style="white-space: nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.rounding_adjustment,{'fieldtype':'Currency'})}} {% endif %}</td>
       </tr>
       <tr>
-        <td class="tg-0pky" colspan="5">Amount In Words:{% if i+1 == total_page %}{{doc.in_words}} {% endif %}</td>
-        <td class="tg-0pky" colspan="2">Invoice Total:</td>
+        <td class="tg-0pky" colspan="5"><b>Amount In Words:</b>{% if i+1 == total_page %}{{doc.in_words}} {% endif %}</td>
+        <td class="tg-0pky" colspan="2"><b>Invoice Total:</b></td>
         <td class="tg-0pky" style="white-space: nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.rounded_total,{'fieldtype':'Currency'})}} {% endif %}</td>
       </tr>
       <tr>
-        <td class="tg-0pky" colspan="8">Remarks:{% if doc.remarks %}{{doc.remarks}}{%endif%}</td>
+        <td class="tg-0pky" colspan="8"><b>Remarks:</b>{% if doc.remarks %}{{doc.remarks}}{%endif%}</td>
       </tr>
 </tbody>
 </table>
@@ -183,10 +183,10 @@
 
 <!--Footer Part-->
 <div  >
-<table class="tg">
+<table class="tg" width="100%">
     <tbody>
         <tr>
-                <td colspan="4" rowspan="2" width="50%">Terms &amp; Conditions:<br>
+                <td colspan="4" rowspan="2" width="50%"><b>Terms &amp; Conditions:</b><br>
                     <p style="font-size: 7px; margin-top: 0px;">
                             (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
                             (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
@@ -210,8 +210,8 @@
 
 </div>
 <!--Footer Part-->
-<div id="footer-html" class="hidden-pdf" style="padding-top:2px;">
-   <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png">
+<div id="footer-html" class="hidden-pdf" style="padding-top:2px;position:fixed;bottom:0px;">
+   <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png" >
 </div>
 <div >
   <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
