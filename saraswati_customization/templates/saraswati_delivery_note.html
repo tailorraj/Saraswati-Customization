@@ -5,28 +5,17 @@
 {% for i in range(0,total_page) %}
 {% set page_num = i+1 %}
 <div >
-
-  <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
-  
-  {% if not no_letterhead %}
-      {% if doc.letter_head %}
-      {% set print_setting = frappe.db.get_single_value('Print Settings', 'repeat_header_footer') %}
-          {% if print_setting == 1 %}
-            <div   id="header-html" >
-                <!-- {{ add_header(loop.index, layout|len, doc, letter_head, no_letterhead, footer) }} -->
-                <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
-                <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-1.png">
-          </div>
-          {% endif %}
-        {% else %}
-          <div style="margin-top:3.5cm;">
-          </div>
-          
-    {% endif %}	
-  {% else %} -->
-    <div style="margin-top:3.5cm;">
-    </div>    
-{% endif %}
+  {%if doc.letter_head == "Standard" %}
+  <div  id="header-html" class="hidden-pdf" >
+    <div class="print-heading">
+      <!-- <h2>Your letter head and logo</h2> -->
+      <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
+      <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-1.png">
+    </div>
+  </div>
+  {% else %}
+  <div style="margin-top:3.5cm;"></div>
+  {% endif %}
 
 <table class="tg" width="100%" style="font-size:9px!important;">
         <thead>
@@ -42,7 +31,7 @@
 <table class="tg" width="100%">
     <thead>
       <tr>
-         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Deliver To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_play%}{{doc.address_display}}{% endif %}</p></td>
+         <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Deliver To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_display%}{{doc.address_display}}{% endif %}</p></td>
          <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Ship To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.shipping_address%}{{doc.shipping_address}}{% endif %}</p></td>
          <td class="tg-0lax" colspan="2" rowspan="2" width="25%">
                 <p>Delivery No:<b>{{doc.name}}</b></p>
@@ -201,26 +190,17 @@
           </tr>
     </tbody>
 </table>
-<!--<img src="https://saraswati.frappe.cloud/files/output-onlinepngtools%20(1).png">-->
 
 
-{% if doc.letter_head %}
-{% set print_setting = frappe.db.get_single_value('Print Settings', 'repeat_header_footer') %}
-      {% if print_setting == 1 %}
-<div id="footer-html" class="hidden-pdf" style="padding-top:2px;">
-    
-  
-  <div class="letter-head-footer" >
-    <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png">
-  </div>
-  
-  {% endif %}
+{% if doc.letter_head == "Standard" %}
+<div id="footer-html" class="hidden-pdf" style="padding-top:2px;position:fixed;bottom:0px;">
+    <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png" >
 </div>
 {% endif %}
 	
 	<div >
         <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
-    </div>
+  </div>
 <!--Footer Part-->
 <div class="page-break"></div>
 {% endfor %}
@@ -241,7 +221,7 @@
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
     .print-heading{
-        display:none;
+        /* display:none; */
         margin:0px;
     }
     body {

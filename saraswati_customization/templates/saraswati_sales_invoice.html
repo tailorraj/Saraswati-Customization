@@ -5,6 +5,7 @@
 {% set page_num = i+1 %}
 <!--Letter Head Part-->
 <div >
+  {%if doc.letter_head == "Standard" %}
   <div  id="header-html" class="hidden-pdf" >
     <div class="print-heading">
       <!-- <h2>Your letter head and logo</h2> -->
@@ -12,6 +13,9 @@
       <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-1.png">
     </div>
   </div>
+  {% else %}
+  <div style="margin-top:3.5cm;"></div>
+  {% endif %}
  
   
 
@@ -57,7 +61,7 @@
 
 <!--Body Part-->
 <div>	
-<table class="tg" width="100%" style="font-size:9px;">
+  <table class="tg" width="100%" style="font-size:9px;">
         <thead>
           <tr>
             <th class="tg-0lax" style="border-bottom:1px solid black!important;width:2%;font-size:9px;width:6%;">Sr No</th>
@@ -92,7 +96,7 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].item_code}}<br />
                 {% for i in items[j].batch %}
                 {% if i.batch_no %}
-                <p><strong>{{i.batch_no|replace("\n", ",")}} - {{i.qty}} {{items[j].uom}}</strong></p>
+                <p><strong>{{i.batch_no}} - {{i.qty}} {{items[j].uom}}</strong></p>
                 {% endif %}
                 {% endfor %}
                 {%if items[j].product_description%}
@@ -129,8 +133,8 @@
           
           
         </tbody>
-</table>
-<table class="tg" width="100%">
+  </table>
+  <table class="tg" width="100%">
     <thead>
         
       <tr>
@@ -174,8 +178,8 @@
       <tr>
         <td class="tg-0pky" colspan="8"><b>Remarks:</b>{% if doc.remarks %}{{doc.remarks}}{%endif%}</td>
       </tr>
-</tbody>
-</table>
+  </tbody>
+  </table>
 </div>
 
 <!--Body Part-->
@@ -210,9 +214,12 @@
 
 </div>
 <!--Footer Part-->
+{% if doc.letter_head == "Standard" %}
 <div id="footer-html" class="hidden-pdf" style="padding-top:2px;position:fixed;bottom:0px;">
    <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png" >
 </div>
+
+{% endif %}
 <div >
   <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
 </div>
