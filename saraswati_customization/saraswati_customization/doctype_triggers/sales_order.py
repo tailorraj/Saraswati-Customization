@@ -23,7 +23,7 @@ def validate(doc, method):
                 if taxes.charge_type =="On Net Total":    
                     taxes.idx = taxes.idx + 1  
                     taxes.charge_type = "On Previous Row Total"
-                    taxes.row_id = "1"
+                    # taxes.row_id = "1"
                     # tax_total_final_value = (doc.freight_charges_custom * taxes.rate)/100
                     # # frappe.msgprint(str(tax_total_final_value))
                     # taxes.tax_amount = tax_total_final_value + (doc.total*taxes.rate)/100
