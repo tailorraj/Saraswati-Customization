@@ -63,17 +63,17 @@
 <table class="tg" width="100%" style="font-size:9px;">
         <thead>
           <tr>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:2%;font-size:9px;width:6%;">Sr No</th>
-            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:40%;">Item</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:2%;font-size:9px;width:6%;text-align: center;font-weight: bolder;">Sr No</th>
+            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:40%;text-align: center;"><b>Item</b></th>
             <!-- <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;">Description</th> -->
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;white-space:nowrap;">HSN Code</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Qty</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">UOM</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">List/Price</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Disc</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Rate/Unit</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;">GST(%)</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;">Amount</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;white-space:nowrap;text-align: center;font-weight: bolder;">HSN Code</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Qty</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">UOM</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">List/Price</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Disc</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Rate/Unit</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;text-align: center;font-weight: bolder;">GST</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -106,12 +106,12 @@
             </td>
             <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].description}}</td> -->
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].gst_hsn_code}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty|int}}<br></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty}}<br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].uom}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;white-space:nowrap;">{{frappe.format(items[j].price_list_rate,{'fieldtype':'Currency'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{frappe.format(items[j].discount_percentage,{'fieldtype':'Percent'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
             
           </tr>
@@ -143,24 +143,24 @@
         
       <tr>
         
-        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if doc.qrcode_image %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="165" height="125">{% endif %}</td>
+        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if doc.qrcode_image %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="155" height="125">{% endif %}</td>
         <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
             <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
-            Bank Name:<b>HDFC Bank,Gandhi Road Branch</b><br>
-            Account no:<b>50200031387322</b><br>
-            Ifsc Code:<b>HDFC0000970</b><br>
+            Bank Name:<b>HDFC Bank,Gandhi Road Branch</b><br><br>
+            Account no:<b>50200031387322</b><br><br>
+            Ifsc Code:<b>HDFC0000970</b><br><br>
             UPI ID: <b>saraswatielectric@hdfcbank</b>
         </td>
-        <td class="tg-0pky" width="12.5%" style="white-space:nowrap;">Qty Total:{% if i+1 == total_page %}{{doc.total_qty|int}}{% endif %}</td>
+        <td class="tg-0pky" width="12.5%" style="white-space:nowrap;">Qty Total:{% if i+1 == total_page %}{{doc.total_qty}}{% endif %}</td>
         <td class="tg-0pky" width="8%">Total:</td>
         <td class="tg-0pky" style="white-space:nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.total,{'fieldtype':'Currency'})}} {% endif %}</td>
       </tr>
-       {% if doc.discount_amount %}
+       
       <tr>
-        <td class="tg-0pky" colspan="2">Discount:</td>
-        <td class="tg-0pky" style="white-space:nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.discount_amount,{'fieldtype':'Currency'})}}{%endif%}</td>
+        <td class="tg-0pky" colspan="2">{% if doc.discount_amount %}Discount: {% endif %}</td>
+        <td class="tg-0pky" style="white-space:nowrap;">{% if i+1 == total_page %}{% if doc.discount_amount %}{{frappe.format(doc.discount_amount,{'fieldtype':'Currency'})}}{%endif%}{% endif %}</td>
       </tr>
-      {% endif %}
+     
       {% for tax in doc.taxes %}
       <tr>
         <td class="tg-0pky" colspan="2" >{{ tax.description }}</td>
@@ -177,7 +177,7 @@
       <tr>
         <td class="tg-0pky" colspan="5"><b>Amount In Words:</b>{% if i+1 == total_page %}{{doc.in_words}} {% endif %}</td>
         <td class="tg-0pky" colspan="2"><b>Invoice Total:</b></td>
-        <td class="tg-0pky" style="white-space: nowrap;">{% if i+1 == total_page %}{{frappe.format(doc.rounded_total,{'fieldtype':'Currency'})}} {% endif %}</td>
+        <td class="tg-0pky" style="white-space: nowrap;font-weight: bolder;">{% if i+1 == total_page %}{{frappe.format(doc.rounded_total,{'fieldtype':'Currency'})}} {% endif %}</td>
       </tr>
       <tr>
         <td class="tg-0pky" colspan="8"><b>Remarks:</b>{% if doc.remarks %}{{doc.remarks}}{%endif%}</td>

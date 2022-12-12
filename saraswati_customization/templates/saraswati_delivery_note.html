@@ -49,6 +49,7 @@
                 <p>LR No:<b>{% if doc.lr_no %}{{doc.lr_no}} {% endif %}</b></p>
                 <p>LR Date:<b>{% if doc.lr_date %}{{frappe.format(doc.lr_date, {'fieldtype':'Date'})}} {% endif %}</b></p>
                 <p>No Of Cartons:<b>{% if doc.no_of_cartons %}{{doc.no_of_cartons}} {% endif %}</b></p>
+                <p>Vehicle No:<b>{%if doc.vehicle_no %}{{doc.vehicle_no}}{% endif %}</b></p>
          </td>
       </tr>
     </thead>
@@ -62,13 +63,13 @@
         <thead>
           <tr>
              <th class="tg-0lax" style="border-bottom:1px solid black!important;width:6%;font-size:9px!important;"><b>Sr No</b></th>
-             <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;width:50%;font-size:9px!important;"><b>Item</b></th>
+             <th class="tg-0lax" style="text-align:left;border-bottom:1px solid black!important;width:50%;font-size:9px!important;"><b>Item</b></th>
              <!-- <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;width:45%;font-size:9px!important;"><b>Description</b></th> -->
              <th class="tg-0lax" style="border-bottom:1px solid black!important;text-align:center;font-size:9px!important;"><b>HSN Code</b></th>
              <th class="tg-0lax" style="border-bottom:1px solid black!important;text-align:center;font-size:9px!important;"><b>Qty</b></th>
              <th class="tg-0lax" style="border-bottom:1px solid black!important;text-align:center;font-size:9px!important;"><b>UOM</b></th>
              <!-- <th class="tg-0lax" style="border-bottom:1px solid black!important;text-align:center;font-size:9px!important;"><b>Rate/Unit</b></th> -->
-             <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;text-align:center;font-size:9px!important;"><b>GST(%)</b></th>
+             <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;text-align:center;font-size:9px!important;"><b>GST</b></th>
              <!-- <th class="tg-0lax" style="border-bottom:1px solid black!important;text-align:center;font-size:9px!important;"><b>Amount</b></th> -->
           </tr>
         </thead>
@@ -125,12 +126,12 @@
       <tr>
         <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">
             <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
-            Bank Name:<b>HDFC Bank,Gandhi Road Branch</b><br>
-            Account no:<b>50200031387322</b><br>
-            Ifsc Code:<b>HDFC0000970</b><br>
-            UPI ID: <b>saraswatielectric@hdfcbank</b>
+            <b>Bank Name:</b>HDFC Bank,Gandhi Road Branch<br>
+            <b>Account no:</b>50200031387322<br>
+            <b>Ifsc Code:</b>HDFC0000970<br>
+            <b>UPI ID:</b> saraswatielectric@hdfcbank
         </td>
-        <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">Remark:</td>
+        <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">Remark: {%if doc.remarks%}{{doc.remarks}}{% endif %}</td>
         <!-- <td class="tg-0lax"></td>
         <td class="tg-0lax"></td> -->
         <!-- <td class="tg-0lax" colspan="6" rowspan = "6" style="white-space:nowrap;text-align:right;"></td> -->
@@ -223,6 +224,9 @@
     .print-heading{
         /* display:none; */
         margin:0px;
+        margin-bottom: 0px!important;
+        padding-bottom: 0px!important;
+        border-bottom: 0px!important;
     }
     body {
       line-height: 1.3;
@@ -275,7 +279,7 @@
     }
     .print-format td, .print-format th {
         vertical-align: top !important;
-        padding: 3px !important;
+        padding: 4px !important;
     }
     
 
