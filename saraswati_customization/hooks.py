@@ -112,23 +112,23 @@ doc_events = {
 # }
 
 
-# jenv = {
-#         "methods":
-# 		[
-# 			"get_sales_invoice_data:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data",
-# 			"get_sales_invoice_data_pricelist:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist",
-# 			"get_delivery_note_data:saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"
-# 		]
-# }
-
-jinja ={
-    "methods":
+jenv = {
+        "methods":
 		[
-			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data",
-			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist",
-			"saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"
+			"get_sales_invoice_data:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data",
+			"get_sales_invoice_data_pricelist:saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist",
+			"get_delivery_note_data:saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"
 		]
 }
+
+# jinja ={
+#     "methods":
+# 		[
+# 			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data.get_sales_invoice_data",
+# 			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist",
+# 			"saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data"
+# 		]
+# }
 # doc_events = {
 #	"*": {
 #		"on_update": "method",
