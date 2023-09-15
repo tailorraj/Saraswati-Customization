@@ -86,7 +86,7 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{doc.items[j].qty|int}}<br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{doc.items[j].uom}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(doc.items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{doc.items[j].item_tax_template.split('-')[1] if doc.items[j].item_tax_template != None else 0}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{doc.items[j].item_tax_template.split(' ')[1] if doc.items[j].item_tax_template != None else 0}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(doc.items[j].amount,{'fieldtype':'Currency'})}}</td>
             
           </tr> -->
