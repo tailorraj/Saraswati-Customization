@@ -111,8 +111,24 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;white-space:nowrap;">{{frappe.format(items[j].price_list_rate,{'fieldtype':'Currency'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{frappe.format(items[j].discount_percentage,{'fieldtype':'Percent'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
+            <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td> -->
+            {% if items[j].item_tax_template is defined %}
+              {% if items[j].item_tax_template.startswith("GST") %}
+                <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
+                    {{ items[j].item_tax_template.split(' ')[-1] }}
+                </td>
+              {% elif items[j].item_tax_template.startswith("Output") %}
+                  <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">
+                      {{ items[j].item_tax_template.split('-')[1] }}
+                  </td>
+              {% else %}
+                  <!-- Handle other cases here, if needed -->
+                  <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">0</td>
+              {% endif %}
+            {% else %}
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">0</td>
+            {% endif %}
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
             
           </tr>
           {% else %}
