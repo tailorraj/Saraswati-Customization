@@ -112,7 +112,7 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{frappe.format(items[j].discount_percentage,{'fieldtype':'Percent'})}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
             <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td> -->
-            {% if items[j].item_tax_template is defined %}
+            {% if items[j].item_tax_template %}
               {% if items[j].item_tax_template.startswith("GST") %}
                 <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
                     {{ items[j].item_tax_template.split(' ')[-1] }}
