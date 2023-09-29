@@ -115,7 +115,7 @@
             {% if items[j].item_tax_template %}
               {% if items[j].item_tax_template.startswith("GST") %}
                 <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
-                    {{ items[j].item_tax_template.split(' ')[-1] }}
+                    {{ items[j].item_tax_template.split(' ')[1] }}
                 </td>
               {% elif items[j].item_tax_template.startswith("Output") %}
                   <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">
@@ -158,8 +158,8 @@
     <thead>
         
       <tr>
-        
-        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if doc.qrcode_image %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="155" height="125">{% endif %}</td>
+        {% set qr_code = frappe.db.get_value("e-Invoice Log",{"sales_invoice":doc.name},"signed_qr_code")%}
+        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if qr_code %}<img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">{% else %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="155" height="125">{% endif %}</td>
         <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
             <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
             Bank Name:<b>HDFC Bank,Gandhi Road Branch</b><br><br>
@@ -313,4 +313,7 @@
         vertical-align: top !important;
         padding: 4px !important;
     }
+    .print-format {
+		  padding:0.25in!important;
+	  }
 </style>
