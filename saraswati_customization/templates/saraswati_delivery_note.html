@@ -97,7 +97,7 @@
             {% if items[j].item_tax_template %}
               {% if items[j].item_tax_template.startswith("GST") %}
                 <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
-                    {{ items[j].item_tax_template.split(' ')[-1] }}
+                    {{ items[j].item_tax_template.split(' ')[1] }}
                 </td>
               {% elif items[j].item_tax_template.startswith("Output") %}
                 <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">
@@ -297,7 +297,9 @@
         vertical-align: top !important;
         padding: 4px !important;
     }
-    
+    .print-format {
+		  padding:0.25in!important;
+	  }
 
 </style>
 
