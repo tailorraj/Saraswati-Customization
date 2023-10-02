@@ -44,7 +44,7 @@
                 
          </td>
          <td class="tg-0lax" colspan="2" rowspan="2" width="25%">
-                <p>Mode Of Transport:<b>{% if doc.mode_of_transport %}{{doc.mode_of_transport}}{% endif %}</b></p>
+                <p>Mode Of Transport:<b>{% if doc.custom_transport_mode %}{{doc.custom_transport_mode}}{% endif %}</b></p>
                 <p>Transporter: <b>{% if doc.transporter %}{{doc.transporter}} {% endif %}</b></p>
                 <p>LR No:<b>{% if doc.lr_no %}{{doc.lr_no}} {% endif %}</b></p>
                 <p>LR Date:<b>{% if doc.lr_date %}{{frappe.format(doc.lr_date, {'fieldtype':'Date'})}} {% endif %}</b></p>
