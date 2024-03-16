@@ -179,7 +179,7 @@
      
       {% for tax in doc.taxes %}
       <tr>
-        <td class="tg-0pky" colspan="2" >{{ tax.description }}</td>
+        <td class="tg-0pky" colspan="2">{{ tax.description + "%" if "Output Tax" in tax.description else tax.description }}</td>
         <td class="tg-0pky" style="white-space:nowrap;text-align: right;">{% if i+1 == total_page %}{{frappe.format(tax.tax_amount_after_discount_amount, {'fieldtype': 'Currency'})}}{%endif%} </td>
       </tr>
       {% endfor %}
