@@ -5,17 +5,23 @@
 {% set page_num = i+1 %}
 <!--Letter Head Part-->
 <div >
-  {%if doc.letter_head == "Saraswati Letterhead" %}
+  <!-- {%if doc.letter_head == "Saraswati Letterhead" %}
   <div  id="header-html" class="hidden-pdf" >
     <div class="print-heading">
-      <!-- <h2>Your letter head and logo</h2> -->
-      <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
       <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-1.png">
     </div>
   </div>
   {% else %}
   <div style="margin-top:3.5cm;"></div>
-  {% endif %}
+  {% endif %} -->
+
+  <div  id="header-html" class="hidden-pdf" >
+    <div class="letter-head">
+      <!-- <h2>Your letter head and logo</h2> -->
+      <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
+      <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-1.png">
+    </div>
+  </div>
   
 
   <table class="tg" width="100%">
@@ -238,7 +244,7 @@
 
 </div>
 <!--Footer Part-->
-{% if doc.letter_head == "Standard" %}
+<!-- {% if doc.letter_head == "Standard" %}
 <div id="footer-html" class="hidden-pdf" style="padding-top:2px;position:fixed;bottom:0px;">
     <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png" >
 </div>
@@ -246,7 +252,18 @@
 <div >
   <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
 </div>
-<div class="page-break"></div>
+<div class="page-break"></div> -->
+
+<div id="footer-html" class="hidden-pdf">
+  <div class="letter-head-footer" style="padding-top:2px;">
+    <img src="/files/sar-2 (1).jpg">
+  </div>
+	<div >
+        <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
+  </div>
+</div>
+
+
 {% endfor %}
 
 <style>
