@@ -5,11 +5,15 @@
 {% for i in range(0,total_page) %}
 {% set page_num = i+1 %}
 <div>
-  <div  id="header-html" class="hidden-pdf" >
-    <div class="letter-head">
-      {{letter_head}}
-    </div>
-  </div>
+  {% if letter_head %}
+        <div {% if print_settings.repeat_header_footer %} id="header-html"  {% endif %}>
+            {{letter_head}}
+    	 </div>
+	    {% else %}
+	    <div style="margin-top:3.5cm;">
+		
+      </div>
+{%endif%}
 
   <table class="tg" width="100%" style="font-size:9px!important;">
     <thead>
@@ -204,7 +208,7 @@
 <table class="tg" width="100%">
   <thead>
     <tr>
-      <td class="tg-0lax" colspan="4">Terms &amp; Conditions: <p style="font-size: 10px;margin-top:0px">
+      <td class="tg-0lax" colspan="4">Terms &amp; Conditions: <p style="font-size:7.5px;margin-top:0px">
 
           (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
           (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
@@ -255,6 +259,7 @@
   </div>
 </div>
 
+<div class="page-break"></div>
 
 
 {% endfor %}

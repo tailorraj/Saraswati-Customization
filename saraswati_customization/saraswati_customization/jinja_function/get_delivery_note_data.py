@@ -12,11 +12,13 @@ def get_delivery_note_data(doc):
     return html
 
 @frappe.whitelist()
-def get_delivery_note_data_with_letter_head(doc,letter_head,footer):
+def get_delivery_note_data_with_letter_head(doc,letter_head,footer,print_settings):
     estimate_doc = frappe.get_doc("Delivery Note",doc.name)
     doc_items = get_grouped_data(estimate_doc.items)
+    print_settings_doc = frappe.get_doc("Print Settings", print_settings)
+
     # html = frappe.render_template("templates/print_estimation_scheme.html",{"doc":estimate_doc, "scheme": doc_scheme})
-    html = frappe.render_template("templates/saraswati_delivery_note_with_letter_head.html",{"doc":estimate_doc, "items": doc_items,  "letter_head": letter_head,"footer":footer})
+    html = frappe.render_template("templates/saraswati_delivery_note_with_letter_head.html",{"doc":estimate_doc, "items": doc_items,  "letter_head": letter_head,"footer":footer,"print_settings":print_settings_doc})
     return html
 def get_grouped_data(data_of_dict):
     data_list = []

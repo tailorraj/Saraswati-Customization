@@ -12,21 +12,23 @@ def get_sales_invoice_data(doc):
     return html
 
 @frappe.whitelist()
-def get_sales_invoice_data_with_letter_head(doc, letter_head, footer):
+def get_sales_invoice_data_with_letter_head(doc, letter_head, footer,print_settings):
     estimate_doc = frappe.get_doc("Sales Invoice",doc.name)
     doc_items = get_grouped_data(estimate_doc.items)
+    print_settings_doc = frappe.get_doc("Print Settings", print_settings)
+    
     # html = frappe.render_template("templates/print_estimation_scheme.html",{"doc":estimate_doc, "scheme": doc_scheme})
-    print("======================letter_head========================")
-    print(letter_head)
-    print("=========================letter_head=====================")
+    print("======================print_settings========================")
+    print(print_settings.repeat_header_footer)
+    print("=========================print_settings=====================")
     
     #latter_haed = frappe.get_doc("Letter Head",doc.letter_head)
     
-    print("=========================footer=====================")
-    print(footer)
-    print("========================footer======================")
+    print("=========================print_settings_doc=====================")
+    print(print_settings_doc)
+    print("========================print_settings_doc======================")
     
-    html = frappe.render_template("templates/saraswati_sales_invoice_with_letter_head.html",{"doc":estimate_doc, "items": doc_items, "letter_head": letter_head,"footer":footer})
+    html = frappe.render_template("templates/saraswati_sales_invoice_with_letter_head.html",{"doc":estimate_doc, "items": doc_items, "letter_head": letter_head,"footer":footer,"print_settings":print_settings_doc})
     return html
 
 def get_grouped_data(data_of_dict):

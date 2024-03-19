@@ -6,13 +6,15 @@
 <!--Letter Head Part-->
 
 <div >
-  <div  id="header-html" class="hidden-pdf" >
-    <div class="letter-head">
-      <!-- <h2>Your letter head and logo</h2> -->
-      <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
-      {{letter_head}}
-    </div>
-  </div>
+  {% if letter_head %}
+        <div {% if print_settings.repeat_header_footer %} id="header-html"  {% endif %}>
+            {{letter_head}}
+    	 </div>
+	    {% else %}
+	    <div style="margin-top:3.5cm;">
+		
+      </div>
+{%endif%}
   
 
   <table class="tg" width="100%">
@@ -204,7 +206,7 @@
     <tbody>
         <tr>
                 <td colspan="4" rowspan="2" width="50%"><b>Terms &amp; Conditions:</b><br>
-                    <p style="font-size: 10px; margin-top: 0px;">
+                    <p style="font-size: 7.5px; margin-top: 0px;">
                       (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
                       (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
                       (3) Goods once sold will not be accepted back.<br>
@@ -223,7 +225,7 @@
               </tr>
         <tr>
                 <td class="tg-0lax" colspan="4" width="50%">
-                    <p style="text-align: right;"><b>For Saraswati Electric Company</b></p><br><br><br><br><br><br><br><br>
+                    <p style="text-align: right;"><b>For Saraswati Electric Company</b></p><br>
                     <p style="margin-top: 59px!important; text-align: right;"><b>Authorised Signatory</b></p>
                 </td>
               </tr>
@@ -243,6 +245,7 @@
         <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
   </div>
 </div>
+<div class="page-break"></div>
 {%endfor%}
 
 <style>
