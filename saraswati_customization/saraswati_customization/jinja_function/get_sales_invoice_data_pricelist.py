@@ -11,6 +11,14 @@ def get_sales_invoice_data_pricelist(doc):
     html = frappe.render_template("templates/saraswati_sales_invoice_pricelist.html",{"doc":estimate_doc, "items": doc_items})
     return html
 
+@frappe.whitelist()
+def get_sales_invoice_data_pricelist_with_letter_head(doc,letter_head,footer):
+    estimate_doc = frappe.get_doc("Sales Invoice",doc.name)
+    doc_items = get_grouped_data(estimate_doc.items)
+    # html = frappe.render_template("templates/print_estimation_scheme.html",{"doc":estimate_doc, "scheme": doc_scheme})
+    html = frappe.render_template("templates/saraswati_sales_invoice_pricelist_with_letter_head.html",{"doc":estimate_doc, "items": doc_items,  "letter_head": letter_head,"footer":footer})
+    return html
+
 def get_grouped_data(data_of_dict):
     data_list = []
     def reduce_data(result,data):
