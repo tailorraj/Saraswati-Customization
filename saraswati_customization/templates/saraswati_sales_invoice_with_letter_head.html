@@ -237,8 +237,50 @@
 </div>
 
 
-<div id="footer-html" class="hidden-pdf">
+<!-- <div id="footer-html" class="hidden-pdf">
   <div class="letter-head-footer" style="padding-top:2px;">
+    {{footer}}
+    <div >
+      <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
+</div>
+  </div>
+	
+</div>
+<div class="page-break"></div> -->
+
+<!-- <div id="footer-html" class="hidden-pdf">
+  <div class="letter-head-footer" style="padding-top:2px;">
+    <div style="position: absolute; bottom: 5px; background-color: green">
+      <img src="/files/sar-2 (1).jpg"> 
+     </div>
+  </div>
+	<div >
+        <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
+  </div>
+</div> -->
+
+<style>
+  /* Define the footer style */
+  .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #f0f0f0; /* Customize as needed */
+      padding: 10px; /* Adjust padding as needed */
+  }
+</style>
+
+
+<!-- <div  id="footer-html"class="letter-head-footer" style="padding-bottom:2px;" style="position: absolute; bottom: 5px;">
+
+ <img src="/files/sar-2 (1).jpg">
+ <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
+
+  </div>
+
+<div class="page-break"></div> -->
+<!-- <div id="footer-html" class="hidden-pdf">
+  <div class="letter-head-footer" style="padding-bottom:2px;position: absolute;bottom: 5px;">
     {{footer}}
   </div>
 	<div >
@@ -246,7 +288,21 @@
   </div>
 </div>
 <div class="page-break"></div>
+<div> -->
+
+ 
+  <div id="footer-html" class="hidden-pdf">
+    {{footer}}
+  </div>
+  <div class="page-break">
+    <center><p style="font-size: 8px !important;margin-top:0px;">
+      {{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}
+    </p></center>
+
+  </div>
+
 {%endfor%}
+
 
 <style>
     .tg  {border-collapse:collapse;border-spacing:0;}
@@ -319,4 +375,13 @@
 	.print-format {
 		padding:0.25in!important;
 	}
+  #footer-html {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
 </style>
