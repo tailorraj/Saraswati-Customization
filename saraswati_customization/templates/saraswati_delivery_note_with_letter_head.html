@@ -251,15 +251,15 @@
 <div class="page-break"></div> -->
 
 <div id="footer-html" class="hidden-pdf">
-  <div class="letter-head-footer" style="padding-top:2px;">
-    {{footer}}
-  </div>
-	<div >
-        <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
-  </div>
+  {{footer}}
+</div>
+<div class="page-break">
+  <center><p style="font-size: 8px !important;margin-top:0px;">
+    {{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}
+  </p></center>
+
 </div>
 
-<div class="page-break"></div>
 
 
 {% endfor %}
@@ -405,5 +405,10 @@
 
   .print-format {
     padding: 0.25in !important;
+  }
+  #footer-html {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   }
 </style>
