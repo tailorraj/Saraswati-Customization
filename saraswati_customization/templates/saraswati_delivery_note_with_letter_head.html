@@ -90,11 +90,10 @@
         <td class="tg-0lax"
           style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px!important;">{{j+1}}</td>
         <td class="tg-0lax"
-          style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px!important;">
-          {{items[j].item_code}}<br />
+          style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px!important;">{{items[j].item_code}}<br />
           {% for i in items[j].batch %}
           {% if i.batch_no %}
-          <p><strong>Batch No.:{{i.batch_no}} - {{i.qty}} Qty</strong></p>
+          <p><strong>{{i.batch_no}} - {{i.qty}} {{items[j].uom}}</strong></p>
           {% endif %}
           {% endfor %}
           {%if items[j].product_description%}
