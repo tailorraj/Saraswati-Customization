@@ -1,0 +1,312 @@
+{%- from "templates/print_formats/standard_macros.html" import add_header,render_field  -%}
+{% set total_page = doc.total_page %}
+{% set item_per_page = frappe.db.get_value("Saraswati Print Setting",None,"item_per_page") %}
+{% for i in range(0,total_page) %}
+{% set page_num = i+1 %}
+<!--Letter Head Part-->
+
+<div>
+    {% if letter_head %}
+        <div {% if print_settings.repeat_header_footer %} id="header-html"  {% endif %}>
+            {{letter_head}}
+        </div>
+    {% else %}
+        <div style="margin-top:3.5cm;"></div>
+    {%endif%}
+
+  
+
+  <table class="tg" width="100%" style="margin-top: 5px;">
+    <thead>
+      <tr>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap; font-size: 14px;">Tax Invoice</th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Gst No:24ADQFS8259L1Z6</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Msme No:UDYAM-GJ-01-0058633</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Pan No:ADQFS8259L</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>{% if doc.copy_type %}{{doc.copy_type}}{% endif %}</b></th>
+        </tr>
+    </thead>
+  </table>
+  <table class="tg" width="100%">
+    <thead>
+      <tr>
+        <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Bill To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.address_display%}{{doc.address_display}}{% endif %}</p></td>
+        <td class="tg-0lax" colspan="2" rowspan="2" width="25%">Ship To:<b>{{doc.customer_name}}</b><br><p style="font-size:9px;">{%if doc.shipping_address%}{{doc.shipping_address}}{% endif %}</p></td>
+        <td class="tg-0lax" colspan="2" rowspan="2" width="25%">
+            <p>Invoice No:<b>{{doc.name}}</b></p>
+            <p>Invoice Date:<b>{{frappe.format(doc.posting_date,{'fieldtype' :'Date'})}}</b></p>
+            <p>Payment Terms:<b>{% if doc.payment_terms_template %}{{doc.payment_terms_template}}{% endif %}</b></p>
+            <p>Due Date:<b>{{frappe.format(doc.due_date,{'fieldtype' :'Date'})}}</b></p>
+            <p>PO No.:{% if doc.po_no %}<b>{{doc.po_no}}</b>{% endif %}</p>
+            <p>PO Date:{% if doc.po_date %}<b>{{frappe.format(doc.po_date,{'fieldtype':'Date'})}}</b>{% endif %}</p>
+            <p>Primary Code:<b> {% if doc.sales_team %}{{doc.sales_team[0].sales_person }}{% endif %}</b></p>
+        </td>
+        <td class="tg-0lax" colspan="2" rowspan="2" width="25%"> 
+            <p>Mode Of Transport:<b>{% if doc.custom_transport_mode %}{{doc.custom_transport_mode}}{% endif %}</b></p>
+            <p>Transporter: <b>{% if doc.transporter %}{{doc.transporter}} {% endif %}</b></p>
+            <p>LR No:<b>{% if doc.lr_no %}{{doc.lr_no}} {% endif %}</b></p>
+            <p>LR Date:<b>{% if doc.lr_date %}{{frappe.format(doc.lr_date, {'fieldtype':'Date'})}} {% endif %}</b></p>
+            <p>No Of Cartons:<b>{%if doc.no_of_cartoons %}{{doc.no_of_cartoons}}{% endif %}</b></p>
+            <p>E-Way Bill No:<b>{%if doc.ewaybill %}{{doc.ewaybill}}{% endif %}</b></p>
+            <p>Vehicle No:<b>{%if doc.vehicle_no %}{{doc.vehicle_no}}{% endif %}</b></p>
+        </td>
+      </tr>
+    </thead>
+  </table>
+</div>
+<!--Letter Head Part-->
+
+<!--Body Part-->
+<div>	
+  <table class="tg" width="100%" style="font-size:9px;">
+        <thead>
+          <tr>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:2%;font-size:9px;width:6%;text-align: center;font-weight: bolder;">Sr No</th>
+            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:45%;font-weight:bolder;text-align:center;">Item</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">HSN Code</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Qty</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">UOM</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Rate/Unit</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;text-align:center;font-weight: bolder;">GST</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for j in range((page_num-1)*item_per_page|int,item_per_page|int*(page_num))  %}
+          {% if j+1<=items|length %}
+
+          <tr >
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{j+1}}</td>
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].item_code}}<br />
+                  {% for i in items[j].batch %}
+                  {% if i.batch_no %}
+                  <p><strong>{{i.batch_no}} - {{i.qty}} {{items[j].uom}}</strong></p>
+                  {% endif %}
+                  {% endfor %}
+                  {%if items[j].product_description%}
+                  {{items[j].product_description}}
+                  {% endif %}
+              </td>
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].gst_hsn_code}}</td>
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty}}<br></td>
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].uom}}</td>
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
+                {% if items[j].item_tax_template %}
+                  {% if items[j].item_tax_template.startswith("GST") %}
+                    <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
+                        {{ items[j].item_tax_template.split(' ')[1] }}
+                    </td>
+                {% elif items[j].item_tax_template.startswith("Output") %}
+                    <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">
+                        {{ items[j].item_tax_template.split('-')[1] }}
+                    </td>
+                {% else %}
+                    <!-- Handle other cases here, if needed -->
+                    <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">0</td>
+                {% endif %}
+            {% else %}
+                <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">0</td>
+            {% endif %}
+
+              <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].amount,{'fieldtype':'Currency'})}}</td>
+            
+          </tr>
+          {% else %}
+           <tr >
+            <td class="tg-0lax" style="color: transparent;border-bottom:0px !important;border-top:0px;text-align:center;">{{j+1}}</td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;"><br></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;"></td>
+            
+          </tr> 
+           {% endif %}
+          
+          
+          
+           {% endfor %}
+          
+          
+        </tbody>
+  </table>
+  <table class="tg" width="100%">
+    <thead>
+        
+      <tr>
+        {% set qr_code = frappe.db.get_value("e-Invoice Log",{"sales_invoice":doc.name},"signed_qr_code")%}
+        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>
+          {% if qr_code %}
+            <img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">
+            {% endif %}
+        </td>
+        <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
+            <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
+            <b>Acount Name:</b> Saraswati Electricals LLP <br><br>
+            <b>Account no:</b> 50200031387322<br><br>
+            <b>Bank Name:</b> HDFC Bank<br><br>
+            <b>Branch:</b> Iscon-Ambli Road<br><br>
+            <b>IFSC Code:</b> HDFC0007153<br><br>
+            <b>UPI ID:</b> saraswatielectric@hdfcbank
+        </td>
+        <td class="tg-0pky" width="12.5%" style="white-space:nowrap;">Qty Total:{% if i+1 == total_page %}{{doc.total_qty|int}}{% endif %}</td>
+        <td class="tg-0pky" width="8%" >Total:</td>
+        <td class="tg-0pky" style="white-space:nowrap;text-align: right;">{% if i+1 == total_page %}{{frappe.format(doc.total,{'fieldtype':'Currency'})}} {% endif %}</td>
+      </tr>
+       
+      <tr>
+        <td class="tg-0pky" colspan="2">{% if doc.discount_amount %}Discount:{% endif %}</td>
+        <td class="tg-0pky" style="white-space:nowrap;text-align: right;">{% if i+1 == total_page %}{% if doc.discount_amount %}{{frappe.format(doc.discount_amount,{'fieldtype':'Currency'})}}{%endif%}{% endif %}</td>
+      </tr>
+      
+      {% for tax in doc.taxes %}
+      <tr>
+        <td class="tg-0pky" colspan="2">{{ tax.description + "%" if "Output Tax" in tax.description else tax.description }}</td>
+        <td class="tg-0pky" style="white-space:nowrap;text-align: right;">{% if i+1 == total_page %}{{frappe.format(tax.tax_amount_after_discount_amount, {'fieldtype': 'Currency'})}}{%endif%} </td>
+      </tr>
+      {% endfor %}
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-0pky" colspan="5"><b>Irn No:</b>{%if doc.irn %}{{doc.irn}}{% endif %}</td>
+        <td class="tg-0pky" colspan="2">Rounded off:</td>
+        <td class="tg-0pky" style="white-space: nowrap;text-align: right;">{% if i+1 == total_page %}{{frappe.format(doc.rounding_adjustment,{'fieldtype':'Currency'})}} {% endif %}</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky" colspan="5"><b>Amount In Words:</b>{% if i+1 == total_page %}{{doc.in_words}} {% endif %}</td>
+        <td class="tg-0pky" colspan="2"><b>Invoice Total:</b></td>
+        <td class="tg-0pky" style="white-space: nowrap;font-weight: bolder;text-align: right;">{% if i+1 == total_page %}{{frappe.format(doc.rounded_total,{'fieldtype':'Currency'})}} {% endif %}</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky" colspan="8"><b>Remarks:</b>{% if doc.remarks %}{{doc.remarks}}{%endif%}</td>
+      </tr>
+  </tbody>
+  </table>
+</div>
+
+<!--Body Part-->
+
+
+<!--Footer Part-->
+<div  >
+  <table class="tg" width="100%">
+    <tbody>
+        <tr>
+                <td style="font-size: 11px;" rowspan="2" width="50%"><b>Terms &amp; Conditions:</b><br>
+                    <p style="font-size: 7.5px; margin-top: 0px;">
+                      (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
+                      (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
+                      (3) Goods once sold will not be accepted back.<br>
+                      (4) Interest @ 24% per annum will be charged if invoice is not paid on or before due date.<br>
+                      (5) Penalty fee of ₹ 1000/- + GST will be charged if cheque is dishonored from the bank.<br>
+                      (6) In case of any discrepancy in quality or quantity, it should be reported to us within 24 hours of receipt of goods.<br>
+                      (7) Subject to Ahmedabad Jurisdiction.<br>
+                      (8)Material dispatch from: Saraswati Electricals LLP- Jetalpur warehouse .<br>
+                      Block No. 100, Jadaba Hall Road, Opp. HP Petrol Pump, Jetalpur, Ahmedabad-382427.<br>
+                            
+                    </p>
+                </td>
+                
+        </tr>
+        <tr>
+                <td class="tg-0lax" colspan="4" width="50%">
+                    <p style="text-align: right;"><b>For Saraswati Electricals LLP</b></p><br>
+                    <p style="margin-top: 62px!important; text-align: right;"><b>Authorised Signatory</b></p>
+                </td>
+              </tr>
+    </tbody>
+</table>
+
+</div>
+
+
+<div id="footer-html" class="hidden-pdf">
+    {{footer}}
+</div>
+<div class="page-break">
+    <center><p style="font-size: 8px !important;margin-top:0px;">
+        {{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}
+    </p></center>
+
+</div>
+{%endfor%}
+
+<style>
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black!important;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:11px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:11px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+
+    .print-heading{
+        /* display:none; */
+        margin:0px;
+        margin-bottom: 0px!important; 
+        padding-bottom: 0px!important;
+        border-bottom: 0px!important;
+    }
+    body {
+      line-height: 1.1;
+    }
+    table tr.page-break{
+    page-break-after:always
+    } 
+    /*table { page-break-inside:auto }*/
+    /*tr    { page-break-inside:avoid; page-break-after:auto }*/
+    #header-html div{
+        margin-top:0px!important;
+        padding-top:0px!important;
+    }
+    .tg  {
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+    .tg td{
+        border-color:black;
+        border-style:solid;
+        border-width:1px;
+        font-family:Arial, sans-serif;
+        font-size:11px;
+        overflow:hidden;
+        padding:10px 5px;
+        word-break:normal;
+        height:10px!important;
+        
+    }
+    .tg th{
+        border-color:black;
+        border-style:solid;
+        border-width:1px;
+        font-family:Arial,sans-serif;
+        font-size:11px;
+        font-weight:normal;
+        overflow:hidden;
+        padding:10px 5px;
+        word-break:normal;
+        table-layout:fixed;
+    }
+    .tg .tg-0lax{
+        text-align:left;
+        vertical-align:top;
+        height:10px!important;
+        
+    }
+    .lg td{
+        max-width:50%;
+    }
+    .print-format td, .print-format th {
+        vertical-align: top !important;
+        padding: 4px !important;
+    }
+	.print-format {
+		padding:0.25in!important;
+	}
+  #footer-html {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+</style>
