@@ -129,7 +129,11 @@ jinja ={
 			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist",
 			"saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist.get_sales_invoice_data_pricelist_with_letter_head",
 			"saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data",
-			"saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data_with_letter_head"
+			"saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data.get_delivery_note_data_with_letter_head",
+            # Phase-2
+            "saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_v2.get_sales_invoice_data_with_letter_head_v2",
+            "saraswati_customization.saraswati_customization.jinja_function.get_sales_invoice_data_pricelist_v2.get_sales_invoice_data_pricelist_with_letter_head_v2",
+            "saraswati_customization.saraswati_customization.jinja_function.get_delivery_note_data_v2.get_delivery_note_data_v2",
 		]
 }
 # doc_events = {
