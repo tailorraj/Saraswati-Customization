@@ -159,18 +159,37 @@
             
             <tr>
                 {% set qr_code = frappe.db.get_value("e-Invoice Log",{"sales_invoice":doc.name},"signed_qr_code")%}
-                <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="30%">
+                <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="30%" style="text-align: center; vertical-align: middle;">
                     {% if qr_code %}
-                        <img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">
-                    {% endif %}</td>
+                      <img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">
+                    {% endif %}
+                </td>
                 <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
                     <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
-                    <b>Acount Name:</b> Saraswati Electricals LLP <br><br>
-                    <b>Account no:</b> 50200031387322<br><br>
-                    <b>Bank Name:</b> HDFC Bank<br><br>
-                    <b>Branch:</b> Iscon-Ambli Road<br><br>
-                    <b>IFSC Code:</b> HDFC0007153<br><br>
-                    <b>UPI ID:</b> saraswatielectric@hdfcbank
+                    <div class="row">
+                      <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Account Name</div>
+                      <div class="col-xs-6"  style="white-space:nowrap;">: Saraswati Electricals LLP</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Account Number</div>
+                        <div class="col-xs-6" style="white-space:nowrap;">: 50200031387322</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Bank Name</div>
+                        <div class="col-xs-6" style="white-space:nowrap;">: HDFC Bank</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Branch</div>
+                        <div class="col-xs-6 " style="white-space:nowrap;">: Iscon-Ambli Road</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">IFSC Code</div>
+                        <div class="col-xs-6" style="white-space:nowrap;">: HDFC0007153</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">UPI ID</div>
+                        <div class="col-xs-6" style="white-space:nowrap;">: saraswatielectric@hdfcbank</div>
+                    </div>
                 </td>
                 <td class="tg-0pky" width="12.5%" style="white-space:nowrap;">Qty Total:{% if i+1 == total_page %}{{doc.total_qty}}{% endif %}</td>
                 <td class="tg-0pky" width="8%">Total:</td>
@@ -280,6 +299,8 @@
     #header-html div{
         margin-top:0px!important;
         padding-top:0px!important;
+        width:100%;
+        top:1
     }
     .tg  {
         border-collapse:collapse;
@@ -320,14 +341,18 @@
     }
     .print-format td, .print-format th {
         vertical-align: top !important;
-        padding: 4px !important;
+        padding: 3px !important;
     }
     .print-format {
 		  padding:0.25in!important;
 	  }
+    .print-format .row:not(.section-break) {
+      line-height: 1.6;
+      margin-top: 0px !important;
+    }
     #footer-html {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
 </style>

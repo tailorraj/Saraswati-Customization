@@ -153,12 +153,30 @@
       <tr>
         <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">
           <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
-          <b>Acount Name:</b> Saraswati Electricals LLP <br>
-            <b>Account no:</b> 50200031387322<br>
-            <b>Bank Name:</b> HDFC Bank<br>
-            <b>Branch:</b> Iscon-Ambli Road<br>
-            <b>IFSC Code:</b> HDFC0007153<br>
-            <b>UPI ID:</b> saraswatielectric@hdfcbank
+          <div class="row">
+            <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Account Name</div>
+            <div class="col-xs-6"  style="white-space:nowrap;">: Saraswati Electricals LLP</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Account Number</div>
+              <div class="col-xs-6" style="white-space:nowrap;">: 50200031387322</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Bank Name</div>
+              <div class="col-xs-6" style="white-space:nowrap;">: HDFC Bank</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">Branch</div>
+              <div class="col-xs-6 " style="white-space:nowrap;">: Iscon-Ambli Road</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">IFSC Code</div>
+              <div class="col-xs-6" style="white-space:nowrap;">: HDFC0007153</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-4" style="white-space:nowrap;font-weight: bold;">UPI ID</div>
+              <div class="col-xs-6" style="white-space:nowrap;">: saraswatielectric@hdfcbank</div>
+          </div>
         </td>
         <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">
           Remark: {%if doc.remarks%}{{doc.remarks}}{% endif %}</td>
@@ -174,7 +192,7 @@
 <table class="tg" width="100%">
   <thead>
     <tr>
-      <td class="tg-0lax" colspan="4">Terms &amp; Conditions: <p style="font-size:7.5px;margin-top:0px">
+      <td class="tg-0lax" colspan="4"><b>Terms &amp; Conditions:</b> <p style="font-size:7.5px;margin-top:0px">
 
           (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
           (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
@@ -184,7 +202,7 @@
           (6) In case of any discrepancy in quality or quantity, it should be reported to us within 24 hours of receipt
           of goods.<br>
           (7) Subject to Ahmedabad Jurisdiction.<br>
-          (8) Material dispatch from: Saraswati Electric LLP- Jetalpur warehouse.<br>
+          (8) Material dispatch from: For Saraswati Electricals LLP- Jetalpur warehouse.<br>
           Block No. 100, Jadaba Hall Road, Opp. HP Petrol Pump, Jetalpur, Ahmedabad-3
         </p>
       </td>
@@ -194,7 +212,7 @@
     <tr>
       <td class="tg-0lax" colspan="2" width="50%">Receiver Signature</td>
       <td class="tg-0lax" colspan="2" width="50%">
-        <p style="text-align: right;white-space:nowrap;"><b>For Saraswati Electric LLP</b></p>
+        <p style="text-align: right;white-space:nowrap;"><b>For Saraswati Electricals LLP</b></p>
         <p style="padding-top:60px!important;text-align:right;"><b>Authorised Signatory</b></p>
       </td>
     </tr>
@@ -352,12 +370,16 @@
   .print-format td,
   .print-format th {
     vertical-align: top !important;
-    padding: 4px !important;
+    padding: 3px !important;
   }
 
   .print-format {
     padding: 0.25in !important;
   }
+  .print-format .row:not(.section-break) {
+      line-height: 1.3;
+      margin-top: 0px !important;
+    }
   #footer-html {
   position: fixed;
   bottom: 0;
