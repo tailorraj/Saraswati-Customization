@@ -6,22 +6,24 @@
 <!--Letter Head Part-->
 
 <div >
-  <div  id="header-html" class="hidden-pdf" >
-    <div class="letter-head">
-      <!-- <h2>Your letter head and logo</h2> -->
-      <!-- <img src="http://dev.akhilaminc.com/files/output-onlinepngtools.png"> -->
-      <img src="/files/sar-1.jpg">
-    </div>
-  </div>
+  {% if letter_head %}
+        <div {% if print_settings.repeat_header_footer %} id="header-html"  {% endif %}>
+            {{letter_head}}
+    	 </div>
+	    {% else %}
+	    <div style="margin-top:3.5cm;">
+		
+      </div>
+{%endif%}
   
 
   <table class="tg" width="100%">
     <thead>
       <tr>
         <th class="lg" colspan="2" style="white-space: nowrap; font-size: 14px;">Tax Invoice</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Gst No:24ADQFS8259L1Z6</b></th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Msme No:UDYAM-GJ-01-0058633</b></th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Pan No:ADQFS8259L</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Gst No:24ABQCS7522P1ZK</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Msme No:UDYAM-GJ-01-0539648</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Pan No:ABQCS7522P</b></th>
         <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>{% if doc.copy_type %}{{doc.copy_type}}{% endif %}</b></th>
         </tr>
     </thead>
@@ -151,14 +153,15 @@
     <thead>
         
       <tr>
-        {% set qr_code = frappe.db.get_value("e-Invoice Log",{"sales_invoice":doc.name},"signed_qr_code")%}
+        {% set qr_code = frappe.db.get_value("e-Invoice Log",{"reference_name":doc.name},"signed_qr_code")%}
         <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if qr_code %}<img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">{% else %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="155" height="125">{% endif %}</td>
         <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
             <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
-            <b>Bank Name:</b>HDFC Bank, Iscon-Ambli Road Branch<br><br>
-            <b>Account no:</b> 50200031387322<br><br>
-            <b>IFSC Code:</b> HDFC0007153<br><br>
-            <b>UPI ID:</b> saraswatielectric@hdfcbank
+            <b>Bank Name:</b> HDFC Bank, Iscon-Ambli Road Branch<br><br>
+            <b>Account Name:</b> Skywire Energy Private Limited<br><br>
+            <b>Account no:</b> 99910700800900<br><br>
+            <b>IFSC Code:</b> HDC0007153<br><br>
+            <b>UPI ID: </b> 9725058426@hdfcbank
         </td>
         <td class="tg-0pky" width="12.5%" style="white-space:nowrap;">Qty Total:{% if i+1 == total_page %}{{doc.total_qty|int}}{% endif %}</td>
         <td class="tg-0pky" width="8%" >Total:</td>
@@ -199,50 +202,43 @@
 
 
 <!--Footer Part-->
-<div  >
+<div>
 <table class="tg" width="100%">
     <tbody>
         <tr>
-                <td colspan="4" rowspan="2" width="50%"><b>Terms &amp; Conditions:</b><br>
-                    <p style="font-size: 10px; margin-top: 0px;">
-                      (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
-                      (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
-                      (3) Goods once sold will not be accepted back.<br>
-                      (4) Interest @ 24% per annum will be charged if invoice is not paid on or before due date.<br>
-                      (5) Penalty fee of ₹ 1000/- + GST will be charged if cheque is dishonored from the bank.<br>
-                      (6) In case of any discrepancy in quality or quantity, it should be reported to us within 24 hours of receipt of goods.<br>
-                      (7) Subject to Ahmedabad Jurisdiction.<br>
-                      (8) Material dispatch from:<br>
-                      Saraswati Electric Company- Jetalpur warehouse.<br>
-                      Block No. 100, Jadaba Hall Road, Opp. HP Petrol Pump, Jetalpur, Ahmedabad-382427.<br>
-                            
-                            
-                    </p>
-                </td>
-                
-              </tr>
+            <td colspan="4" rowspan="2" width="50%"><b>Terms &amp; Conditions:</b><br>
+                <p style="font-size: 10px; margin-top: 0px;">
+                  (1) We do not hold responsible for any breakage/damage/shortage/leakage in transit.<br>
+                  (2) Our responsibility ceases when the goods are delivered to the transporter.<br>
+                  (3) Goods once sold will not be accepted back.<br>
+                  (4) Interest @ 24% per annum will be charged if invoice is not paid on or before due date.<br>
+                  (5) Penalty fee of ₹ 1000/- + GST will be charged if cheque is dishonored from the bank.<br>
+                  (6) In case of any discrepancy in quality or quantity, it should be reported to us within 24 hours of receipt of goods.<br>
+                  (7) Subject to Ahmedabad Jurisdiction.
+                </p>
+            </td>    
+        </tr>
         <tr>
-                <td class="tg-0lax" colspan="4" width="50%">
-                    <p style="text-align: right;"><b>For Saraswati Electric Company</b></p><br><br><br><br><br><br><br><br>
-                    <p style="margin-top: 59px!important; text-align: right;"><b>Authorised Signatory</b></p>
-                </td>
-              </tr>
+            <td class="tg-0lax" colspan="4" width="50%">
+                <p style="text-align: right;"><b>For Skywire Energy Private Limited</b></p><br><br><br><br><br><br><br><br>
+                <p style="margin-top: 59px!important; text-align: right;"><b>Authorised Signatory</b></p>
+            </td>
+        </tr>
     </tbody>
 </table>
-<!-- <div id="footer-html" class="hidden-pdf">
-  <img alt="Saraswati Letterhead" height="" src="/files/sar-2 (1).jpg" style="height: px;">
-  </div> -->
 </div>
 
-
+{% if footer %}
 <div id="footer-html" class="hidden-pdf">
-  <div class="letter-head-footer" style="padding-top:2px;">
-    <img src="/files/sar-2 (1).jpg">
+    {{footer}}
   </div>
-	<div >
-        <center><p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p></center>
+{% endif  %}
+  <div class="page-break">
+    <center><p style="font-size: 8px !important;margin-top:0px;">
+      {{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}
+    </p></center>
+
   </div>
-</div>
 {%endfor%}
 
 <style>

@@ -19,11 +19,10 @@
     <thead>
       <tr>
         <th class="lg" colspan="2" style="white-space: nowrap; font-size: 14px;">Delivery Challan</th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>GST:24ADQFS8259L1Z6</b></th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>MSME NO:UDYAM-GJ-01-0058633</b></th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>PAN NO:ADQFS8259L</b></th>
-        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>{% if doc.copy_type %}{{doc.copy_type}}{% endif
-            %}</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Gst No:24ABQCS7522P1ZK</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Msme No:UDYAM-GJ-01-0539648</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>Pan No:ABQCS7522P</b></th>
+        <th class="tg-0lax" colspan="2" style="white-space: nowrap;"><b>{% if doc.copy_type %}{{doc.copy_type}}{% endif %}</b></th>
       </tr>
     </thead>
   </table>
@@ -161,12 +160,12 @@
     <thead>
       <tr>
         <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">
-          <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b>
-          </p>
+          <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
           <b>Bank Name:</b> HDFC Bank, Iscon-Ambli Road Branch<br>
-          <b>Account no:</b> 50200031387322<br>
+          <b>Account Name:</b> Skywire Energy Private Limited<br>
+          <b>Account no:</b> 99910700800900<br>
           <b>IFSC Code:</b> HDFC0007153<br>
-          <b>UPI ID:</b> saraswatielectric@hdfcbank
+          <b>UPI ID:</b> 	9725058426@hdfcbank
         </td>
         <td class="tg-0lax" colspan="2" rowspan="{{4+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="50%">
           Remark: {%if doc.remarks%}{{doc.remarks}}{% endif %}</td>
@@ -216,10 +215,7 @@
           (5) Penalty fee of ₹ 1000/- + GST will be charged if cheque is dishonored from the bank.<br>
           (6) In case of any discrepancy in quality or quantity, it should be reported to us within 24 hours of receipt
           of goods.<br>
-          (7) Subject to Ahmedabad Jurisdiction.<br>
-          (8) Material dispatch from:<br>
-          Saraswati Electric Company- Jetalpur warehouse.<br>
-          Block No. 100, Jadaba Hall Road, Opp. HP Petrol Pump, Jetalpur, Ahmedabad-3
+          (7) Subject to Ahmedabad Jurisdiction.
         </p>
       </td>
     </tr>
@@ -228,30 +224,18 @@
     <tr>
       <td class="tg-0lax" colspan="2" width="50%">Receiver Signature</td>
       <td class="tg-0lax" colspan="2" width="50%">
-        <p style="text-align: right;white-space:nowrap;"><b>For Saraswati Electric Company</b></p>
+        <p style="text-align: right;white-space:nowrap;"><b>For 	Skywire Energy Private Limited</b></p>
         <p style="padding-top:60px!important;text-align:right;"><b>Authorised Signatory</b></p>
       </td>
     </tr>
   </tbody>
 </table>
 
-<!-- 
-{% if doc.letter_head == "Standard" %}
-<div id="footer-html" class="hidden-pdf" style="padding-top:2px;position:fixed;bottom:0px;">
-  <img src="https://saraswati.frappe.cloud/files/output-onlinepngtools-(1).png">
-</div>
-{% endif %}
-
-<div>
-  <center>
-    <p style="font-size: 8px !important;margin-top:0px;">{{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}</p>
-  </center>
-</div>
-<div class="page-break"></div> -->
-
+{% if footer %}
 <div id="footer-html" class="hidden-pdf">
   {{footer}}
 </div>
+{% endif %}
 <div class="page-break">
   <center><p style="font-size: 8px !important;margin-top:0px;">
     {{ _("Page") }} {{i+1}} {{ _("of") }} {{total_page}}

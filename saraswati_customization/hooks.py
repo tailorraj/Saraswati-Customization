@@ -173,7 +173,7 @@ fixtures = [
                 "Sales Order-freight_charges_custom","Sales Invoice Item-product_description","Delivery Note Item-product_description",
 				"Quotation-sales_team","Quotation-section_break_86","Quotation-sales_team","Quotation-total_page","Sales Invoice-no_of_cartoons",
                 "Sales Invoice-copy_type","Sales Invoice-custom_transport_mode","Sales Invoice-total_page","Delivery Note-copy_type","Delivery Note-custom_transport_mode",
-                "Delivery Note-no_of_cartoons","Delivery Note-total_page"
+                "Delivery Note-no_of_cartoons","Delivery Note-total_page","Sales Invoice Item-custom_item_history","Sales Invoice Item-item_sale_history","Sales Invoice-freight_charges_custom"
             ]
         ]
     ]}
