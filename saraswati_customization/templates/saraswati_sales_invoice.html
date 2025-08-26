@@ -62,32 +62,20 @@
   <table class="tg" width="100%" style="font-size:9px;">
         <thead>
           <tr>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:2%;font-size:9px;width:6%;text-align: center;font-weight: bolder;">Sr No</th>
-            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:45%;font-weight:bolder;text-align:center;">Item</th>
-            <!-- <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;">Description</th> -->
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">HSN Code</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Qty</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">UOM</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Rate/Unit</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;text-align:center;font-weight: bolder;">GST</th>
-            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;">Amount</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:4%;font-size:9px;text-align: center;font-weight: bolder;">SNo</th>
+            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:11%;font-weight:bolder;text-align:center;">Item</th>
+            <th class="tg-0lax" style="text-align:center;border-bottom:1px solid black!important;font-size:9px;width:35%;font-weight:bolder;">Item Name</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;width:6%;">HSN Code</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;width:4%;">Qty</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;width:5%;">UOM</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;width:8%;">Rate/Unit</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;width:5%;font-size:9px;text-align:center;font-weight: bolder;width:4%;">GST</th>
+            <th class="tg-0lax" style="border-bottom:1px solid black!important;font-size:9px;text-align: center;font-weight: bolder;width:8%;">Amount</th>
           </tr>
         </thead>
         <tbody>
             {% for j in range((page_num-1)*item_per_page|int,item_per_page|int*(page_num))  %}
             {% if j+1<=items|length %}
-          <!-- <tr >
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{j+1}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{doc.items[j].item_code}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{doc.items[j].description}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{doc.items[j].gst_hsn_code}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{doc.items[j].qty|int}}<br></td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{doc.items[j].uom}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(doc.items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{doc.items[j].item_tax_template.split(' ')[1] if doc.items[j].item_tax_template != None else 0}}</td>
-            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;">{{frappe.format(doc.items[j].amount,{'fieldtype':'Currency'})}}</td>
-            
-          </tr> -->
 
           <tr >
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;">{{j+1}}</td>
@@ -101,12 +89,11 @@
                 {{items[j].product_description}}
                 {% endif %}
             </td>
-            <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].description}}</td> -->
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:left;font-size:9px;">{{items[j].item_name}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].gst_hsn_code}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].qty}}<br></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;font-size:9px;">{{items[j].uom}}</td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;font-size:9px;text-align:right;">{{frappe.format(items[j].rate, {'fieldtype': 'Currency'})}}</td>
-            <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">{{items[j].item_tax_template.split('-')[1] if items[j].item_tax_template != None else 0}}</td> -->
             {% if items[j].item_tax_template %}
               {% if items[j].item_tax_template.startswith("GST") %}
                 <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;font-size:9px;text-align:right;">
@@ -137,7 +124,7 @@
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:right;"></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
             <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;text-align:center;"></td>
-            <!-- <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td> -->
+            <td class="tg-0lax" style="border-bottom:0px !important;border-top:0px;white-space:nowrap;"></td>
             
           </tr> 
            {% endif %}
@@ -154,7 +141,7 @@
         
       <tr>
         {% set qr_code = frappe.db.get_value("e-Invoice Log",{"reference_name":doc.name},"signed_qr_code")%}
-        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if qr_code %}<img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">{% else %}<img src="https://saraswati.frappe.cloud/{{doc.qrcode_image}}" alt="Image" width="155" height="125">{% endif %}</td>
+        <td class="text-center" colspan="3" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width=30%>{% if qr_code %}<img src="data:image/png;base64,{{ get_qr_code(qr_code, scale=2) }}" class="qrcode" width="155" height="125">{% endif %}</td>
         <td class="tg-0pky" colspan="2" rowspan="{{2+(doc.taxes|length if doc.taxes|length > 0 else 0)}}" width="45%">
             <p class="text-left" style="text-decoration: underline; text-decoration-thickness: 2px;"><b>Bank Details:-</b></p>
             <b>Bank Name:</b> HDFC Bank, Iscon-Ambli Road Branch<br><br>

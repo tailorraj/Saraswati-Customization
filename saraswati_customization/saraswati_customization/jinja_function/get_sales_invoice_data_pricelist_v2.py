@@ -31,6 +31,7 @@ def get_grouped_data(data_of_dict):
         else:
             result[key] = {
                 "item_code": data.item_code,
+                "item_name": data.item_name,
                 "description": data.description,
                 "product_description":data.product_description,
                 "gst_hsn_code": data.gst_hsn_code,
